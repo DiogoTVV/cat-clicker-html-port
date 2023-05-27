@@ -28,14 +28,18 @@
 		</style>
 
 		<h1 id="clickTxt"> Cats: 0 </h1>
-		<img id="cat" onclick="catClick()" src="images/cat/cat.png" />
+		<img id="cat" onload="catLoad()" onclick="catClick()" src="images/cat/cat.png">
 
 		<script>
 			var clicks = 0;
 			var catSpr = document.getElementById("cat");
-			var initialWidth = catSpr.width;
-			var initialHeight = catSpr.height;
-
+			var initialWidth = 0;
+			var initialHeight = 0;
+			function catLoad()
+			{
+				initialWidth = catSpr.width;
+				initialHeight = catSpr.height;
+			}
 			var bounced = false;
 
 			function catClick()
