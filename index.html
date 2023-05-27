@@ -1,0 +1,70 @@
+<html>
+	<head>
+		<title> Meowkler: Cat Clicker </title>
+	</head>
+
+	<body>
+		<style>
+			body{
+				background: gray;
+			}
+			#cat:hover{
+				cursor:pointer;
+			}
+			#cat{
+				/*position:absolute;*/
+				display:block;
+				float:center;
+				margin:150px auto auto auto;
+			}
+			#clickTxt{
+				text-align: center;
+				font-family: consolas;
+				/*-webkit-text-stroke: 2px white;*/
+				width:auto;
+				background: white;
+				color: black;
+			}
+		</style>
+
+		<h1 id="clickTxt"> Cats: 0 </h1>
+		<img id="cat" onclick="catClick()" src="images/cat/cat.png" />
+
+		<script>
+			var clicks = 0;
+			var catSpr = document.getElementById("cat");
+			var initialWidth = catSpr.width;
+			var initialHeight = catSpr.height;
+
+			var bounced = false;
+
+			function catClick()
+			{
+				bounced = !bounced;
+				clicks++;
+				document.getElementById("clickTxt").innerHTML = "Cats: " + clicks;
+
+				var audio = new Audio('sounds/default.mp3');
+				audio.play();
+
+				catSpr.width = initialWidth; catSpr.height = initialHeight;
+				catSpr.width  += catSpr.width  * 0.1 * (bounced ? -1 : 1);
+				catSpr.height += catSpr.height * 0.1 * (bounced ? 1 : -1);
+			}
+
+			// Update the count down every 1 second
+			var x = setInterval(function() {
+
+				catSpr.width = lerp(catSpr.width, initialWidth, 0.1);
+				catSpr.height = lerp(catSpr.height, initialHeight, 0.1);
+
+			}, 16.67);
+
+			
+			function lerp(a, b, t)
+			{
+				return (a + (b - a) * t);
+			}
+		</script>
+	</body>
+</html>
